@@ -19,4 +19,4 @@ json_data = {
 }
 
 response = requests.post(url, headers=headers, json=json_data)
-print("Komut oluşturuldu:" if response.status_code == 200 else "Hata:", response.text)
+print("Komut oluşturuldu!" if response.status_code == 200 else f"HATA: {response.status_code}\n{response.text}")
