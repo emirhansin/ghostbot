@@ -39,7 +39,6 @@ def interactions():
         username = user["username"]
         current_time = time.time()
 
-        # Cooldown kontrolü
         if user_id in cooldowns and current_time - cooldowns[user_id] < 5:
             return jsonify({
                 "type": 4,
@@ -51,7 +50,17 @@ def interactions():
 
         cooldowns[user_id] = current_time
 
-        if command_name == "mesaj_gönder":
+        # --- /selam komutu ---
+        if command_name == "selam":
+            return jsonify({
+                "type": 4,
+                "data": {
+                    "content": "Selamlar! 👻 Hayalet bot burada."
+                }
+            })
+
+        # --- /mesaj_gönder komutu ---
+        elif command_name == "mesaj_gönder":
             options = {opt["name"]: opt["value"] for opt in data["data"]["options"]}
             kanal_id = options.get("kanal")
             metin = options.get("metin")
@@ -69,7 +78,7 @@ def interactions():
                 try:
                     renk_int = int(renk.lstrip("#"), 16)
                 except:
-                    renk_int = 0x00ffff  # default fallback
+                    renk_int = 0x00ffff
 
                 payload = {
                     "content": f"<@{user_id}> adlı kullanıcıdan bir mesajınız var:",
