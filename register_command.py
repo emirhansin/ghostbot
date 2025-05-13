@@ -13,10 +13,48 @@ headers = {
 }
 
 json_data = {
-    "name": "selam",
-    "description": "Bot selam verir",
-    "type": 1
+    "name": "mesaj_gönder",
+    "description": "Belirtilen kanala mesaj gönderir",
+    "type": 1,
+    "options": [
+        {
+            "name": "kanal",
+            "description": "Mesaj gönderilecek kanal",
+            "type": 7,
+            "required": True
+        },
+        {
+            "name": "metin",
+            "description": "Gönderilecek mesaj",
+            "type": 3,
+            "required": True
+        },
+        {
+            "name": "embed",
+            "description": "Mesaj embed mi olsun?",
+            "type": 5,
+            "required": False
+        },
+        {
+            "name": "başlık",
+            "description": "Embed başlığı (isteğe bağlı)",
+            "type": 3,
+            "required": False
+        },
+        {
+            "name": "renk",
+            "description": "Embed rengi (hex: #rrggbb)",
+            "type": 3,
+            "required": False
+        },
+        {
+            "name": "imza",
+            "description": "Embed imzası (footer)",
+            "type": 3,
+            "required": False
+        }
+    ]
 }
 
 response = requests.post(url, headers=headers, json=json_data)
-print("Komut oluşturuldu!" if response.status_code == 200 else f"HATA: {response.status_code}\n{response.text}")
+print("✅ Slash komutu yüklendi!" if response.status_code == 200 else f"❌ Hata: {response.status_code}\n{response.text}")
